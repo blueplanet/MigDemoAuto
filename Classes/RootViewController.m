@@ -11,6 +11,7 @@
 
 @interface RootViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)saveContext;
 @end
 
 
@@ -22,6 +23,31 @@
 #pragma mark -
 #pragma mark View lifecycle
 
+- (void)loadData {
+	NSManagedObject *c1 = [NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:self.managedObjectContext];
+	[c1 setValue:@"健康" forKey:@"name"];
+	
+	NSManagedObject *c2 = [NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:self.managedObjectContext];
+	[c2 setValue:@"勉強" forKey:@"name"];
+	
+	NSManagedObject *t1 = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
+	[t1 setValue:c1 forKey:@"category"];
+	[t1 setValue:@"ジョギング" forKey:@"name"];
+	[t1 setValue:[NSDate date] forKey:@"dueDate"];
+	
+	NSManagedObject *t21 = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
+	[t21 setValue:c2 forKey:@"category"];
+	[t21 setValue:@"英語" forKey:@"name"];
+	[t21 setValue:[NSDate dateWithTimeIntervalSinceNow:-600] forKey:@"dueDate"];
+	
+	NSManagedObject *t22 = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
+	[t22 setValue:c2 forKey:@"category"];
+	[t22 setValue:@"Cocoa" forKey:@"name"];
+	[t22 setValue:[NSDate dateWithTimeIntervalSinceNow:1200] forKey:@"dueDate"];
+	
+	[self saveContext];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -31,6 +57,8 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
+	
+	//[self loadData];
 }
 
 
@@ -85,9 +113,13 @@
     // If appropriate, configure the new managed object.
     [newManagedObject setValue:[NSDate date] forKey:@"dueDate"];
     
-    // Save the context.
+	[self saveContext];
+}
+
+- (void)saveContext {
+	// Save the context.
     NSError *error = nil;
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
