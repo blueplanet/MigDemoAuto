@@ -3,7 +3,7 @@
 //  MigDemoAuto
 //
 //  Created by 蒼い惑星 on 11/02/13.
-//  Copyright 2011 ボイジャー. All rights reserved.
+//  Copyright 2011 蒼い惑星. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
