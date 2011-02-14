@@ -11,6 +11,7 @@
 
 @interface RootViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)saveContext;
 @end
 
 
@@ -21,6 +22,19 @@
 
 #pragma mark -
 #pragma mark View lifecycle
+- (void)loadData {
+	NSManagedObject *e1 = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+	[e1 setValue:[NSDate date] forKey:@"timeStamp"];
+	
+	NSManagedObject *e2 = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+	[e2 setValue:[NSDate dateWithTimeIntervalSinceNow:-600] forKey:@"timeStamp"];
+	
+	NSManagedObject *e3 = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+	[e3 setValue:[NSDate dateWithTimeIntervalSinceNow:120] forKey:@"timeStamp"];
+	
+	[self saveContext];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,6 +45,8 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
+	
+	//[self loadData];
 }
 
 
@@ -85,9 +101,13 @@
     // If appropriate, configure the new managed object.
     [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
     
-    // Save the context.
+	[self saveContext];
+}
+
+- (void)saveContext {
+	// Save the context.
     NSError *error = nil;
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -97,7 +117,6 @@
         abort();
     }
 }
-
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
 
