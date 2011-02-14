@@ -81,6 +81,8 @@ cBIAAYagrxEBBQAHAAgAFwAYADQANQA2AEIAQwBEAEUAYABhAGIAaABpAHUAgwCEAIUAhgCHAIgAoQCn
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z112"></relationship>
     </object>
     <object type="XDDEVRELATIONSHIPMAPPING" id="z108">
+        <attribute name="sourcemappingname" type="string">TaskToMemo</attribute>
+        <attribute name="sourcekeypath" type="string">$source</attribute>
         <attribute name="autogenerateexpression" type="bool">1</attribute>
         <attribute name="name" type="string">memos</attribute>
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z105"></relationship>

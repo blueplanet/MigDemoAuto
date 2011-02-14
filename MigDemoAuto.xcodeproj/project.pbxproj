@@ -300,7 +300,7 @@
 				28860B760F44E54D00985440 /* MigDemoAuto.xcdatamodel */,
 				3D8D818D13095C5700F29901 /* MigDemoAuto 2.xcdatamodel */,
 			);
-			currentVersion = 28860B760F44E54D00985440 /* MigDemoAuto.xcdatamodel */;
+			currentVersion = 3D8D818D13095C5700F29901 /* MigDemoAuto 2.xcdatamodel */;
 			path = MigDemoAuto.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

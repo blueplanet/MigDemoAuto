@@ -60,7 +60,7 @@
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
 	
-	[self loadData];
+	//[self loadData];
 }
 
 
