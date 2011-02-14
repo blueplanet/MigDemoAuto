@@ -34,6 +34,7 @@
 	[t1 setValue:c1 forKey:@"category"];
 	[t1 setValue:@"ジョギング" forKey:@"name"];
 	[t1 setValue:[NSDate date] forKey:@"dueDate"];
+	[t1 setValue:@"毎日５キロ" forKey:@"memo"];
 	
 	NSManagedObject *t21 = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
 	[t21 setValue:c2 forKey:@"category"];
@@ -44,6 +45,7 @@
 	[t22 setValue:c2 forKey:@"category"];
 	[t22 setValue:@"Cocoa" forKey:@"name"];
 	[t22 setValue:[NSDate dateWithTimeIntervalSinceNow:1200] forKey:@"dueDate"];
+	[t22 setValue:@"iOS開発|Mac OS開発もやりましょう！" forKey:@"memo"];
 	
 	[self saveContext];
 }
@@ -58,7 +60,7 @@
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
 	
-	//[self loadData];
+	[self loadData];
 }
 
 
