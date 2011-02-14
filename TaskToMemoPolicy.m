@@ -22,9 +22,11 @@
 	NSArray *memoArray = [memoStr componentsSeparatedByString:@"|"];
 	for (NSString *memo in memoArray) {
 		if (memo) {
+			// デスティネーションインスタンス作成 (デスティネーションManabedObjectContextである)
 			NSManagedObject *memoEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Memo" inManagedObjectContext:moc];
 			[memoEntity setValue:memo forKey:@"content"];
 			
+			// 関連付ける
 			[manager associateSourceInstance:sInstance withDestinationInstance:memoEntity forEntityMapping:mapping];
 			
 			NSLog(@"Task:%@ newMemo:%@", [sInstance valueForKey:@"name"], memo);
